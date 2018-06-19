@@ -45,6 +45,7 @@ Wildcards can be used in search for a filename containing specific characters.
 The ``locate``.
 
 The ``find``:
+```
     - Finding based on time:
         ```
         $ find / -ctime 3
@@ -53,6 +54,8 @@ The ``find``:
         ```
         $ find / -size +10M
         ```    
+```
+        
 ### Manage files
 Use the following utilities to view files:
 |Command|Usage|
