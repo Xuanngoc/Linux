@@ -34,6 +34,7 @@
     3. standard error or **stderr**
 ### Search for files
 Wildcards can be used in search for a filename containing specific characters.
+
 |Wildcards|Result|
 |---------|-----------|
 |?     |Matches any single character|
@@ -42,6 +43,7 @@ Wildcards can be used in search for a filename containing specific characters.
 |[!set]|Matches any character not in the set of characters|
 
 The ``locate``.
+
 The ``find``:
     - Finding based on time:
         ```
