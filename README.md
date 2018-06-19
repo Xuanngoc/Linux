@@ -21,6 +21,6 @@
 |tree -d|Just list the directories and suppress listing file names|
 
 ### Hard and Symbolic
-    - Hard link: ``ln file.txt file1.txt`` 
-    - Soft link: ``ln -s file.txt file1.txt``
+    - Hard link: ln file.txt file1.txt 
+    - Soft link: ln -s file.txt file1.txt
 
