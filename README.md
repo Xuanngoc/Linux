@@ -69,6 +69,7 @@ Use the following utilities to view files:
 
 The ``touch`` command is often used to set or update the access, change, and modify times of files. By default it resets a file's time stamp to match the current time.
 However, you can also __create__ an empty file.
+
 The ``mkdir`` command is used to create a directory. Removing a directory is simply done with ``rmdir`` command. The directory must be __empty__ or it will fail.
 
 ### Compare files 
