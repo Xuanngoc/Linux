@@ -55,9 +55,10 @@ The ``find``:
         $ find / -size +10M
         ```    
 ```
-        
+
 ### Manage files
 Use the following utilities to view files:
+
 |Command|Usage|
 |:-------|-----------|
 |cat  |Used for viewing files that are not very long|
@@ -65,6 +66,7 @@ Use the following utilities to view files:
 |less |Used to view larger files because it is a paging program; it pauses at each screenful of text, provides scroll-back capabilities, and lets you search and navigate within the file.|
 |tail |Used to print the last 10 lines of a file by default. You can change the number of lines by doing -n 15 or just -15 if you wanted to look at the last 15 lines instead of the default|
 |head |The opposite of tail; by default it prints the first 10 lines of a file|
+
 The ``touch`` command is often used to set or update the access, change, and modify times of files. By default it resets a file's time stamp to match the current time.
 However, you can also __create__ an empty file.
 The ``mkdir`` command is used to create a directory. Removing a directory is simply done with ``rmdir`` command. The directory must be __empty__ or it will fail.
