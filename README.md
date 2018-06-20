@@ -1,11 +1,11 @@
 # Linux
 ----
-## Basic commands
-### Locating Applications
+# Basic commands
+## Locating Applications
 - ``which`` to find out exactly where the __file__ program resides on the filesystem
 - ``whereis`` 
 
-### Accessing Directories
+## Accessing Directories
 |Command|Result|
 |-------|-----------|
 |cd 	|Change to your home directory|
@@ -13,7 +13,7 @@
 |cd - |Change to previous directory|
 |cd /	|Changes your current directory to the root (/) directory|
 
-### Exploring the Filesystem
+## Exploring the Filesystem
 |Command|Result|
 |-------|-----------|
 |ls 	  |List the contents of the present working directory|
@@ -21,18 +21,18 @@
 |tree   |Displays a tree view of the filesystem|
 |tree -d|Just list the directories and suppress listing file names|
 
-### Hard and Symbolic
+## Hard and Symbolic
     - Hard link: ln file.txt file1.txt 
     - Soft link: ln -s file.txt file1.txt
 
 ---
 ---
-## Working with files
-### The file streams
+# Working with files
+## The file streams
     1. standard input or **stdin**
     2. standard output or **stdout**
     3. standard error or **stderr**
-### Search for files
+## Search for files
 Wildcards can be used in search for a filename containing specific characters.
 
 |Wildcards|Result|
@@ -56,7 +56,7 @@ The ``find``:
         ```    
 ```
 
-### Manage files
+## Manage files
 Use the following utilities to view files:
 
 |Command|Usage|
@@ -72,7 +72,7 @@ However, you can also __create__ an empty file.
 
 The ``mkdir`` command is used to create a directory. Removing a directory is simply done with ``rmdir`` command. The directory must be __empty__ or it will fail.
 
-### Compare files 
+## Compare files 
 The ``diff`` command is used to compare files and directories.
 For instance:
 ```
@@ -105,6 +105,6 @@ $
 $  diff -i file1.txt file2.txt
 $ 
 ```
-### The file utility 
+## The file utility 
 The ``file`` to check  the contents and certain characteristics to determine whether the files are plain text, shared libraries, executable programs, scripts, or something else. 
 
