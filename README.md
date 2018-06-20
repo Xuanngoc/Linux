@@ -121,7 +121,8 @@ Some examples of filesystem types that Linux supports are:
 Before you can start using a filesystem, you need to ``mount`` it to the filesystem tree at a **mountpoint**. Mount points are __usually__ empty directories. 
 
 The ``mount`` command is used to attach a filesystem somewhere within the filesystem tree. Arguments include the ``device node`` and ``mount point``.
-``$ mount /dev/sda5 /mnt``
+
+``` $ mount /dev/sda5 /mnt ```
 
 
 
