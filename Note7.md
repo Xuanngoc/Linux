@@ -99,14 +99,14 @@ a32007
 
 Set a new host name.
 ```
-hostname NEW_NAME
+ aa32007@a32007:~$ sudo hostname xuanngoc
 ```
 
 Use the ``hostnamectl`` utility to get and set the hostname.
 ```
 aa32007@a32007:~$ hostnamectl 
    Static hostname: a32007
-Transient hostname: ouanngoc
+Transient hostname: xuanngoc
          Icon name: computer-laptop
            Chassis: laptop
         Machine ID: 89f73e2f3956433594e7adcf70b0317a
