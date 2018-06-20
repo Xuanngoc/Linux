@@ -114,7 +114,7 @@ The ``file`` to check  the contents and certain characteristics to determine whe
 On many systems, including Linux, the filesystem is structured like a tree. The tree is usually portrayed as inverted, and starts at what is most often called the root directory, which marks the beginning of the hierarchical filesystem and is also denoted by /.
 Some examples of filesystem types that Linux supports are:
 1. **ext3**, **ext4**, **btrfs**, **xfs** (native Linux filesystems)
-2. **vfat**, **ntfs**, **hfs** (filesystems from other operating systems)
+2. **vfat**, **ntfs**, **hfs** (filesystems from other operating systems) 
 
 **Each filesystem resides on a hard disk partition**. Partitions help to organize the contents of disks according to the kind of data contained and how it is used. For example, important programs required to run the system are often kept on a separate partition than the one that contains files owned by regular users. In addition, temporary files created and destroyed during the normal operation of Linux are often located on a separate partition; in this way, using all available space on a particular partition may not fatally affect the normal operation of the system.
 Before you can start using a filesystem, you need to ``mount`` it to the filesystem tree at a **mountpoint**. Mount points are __usually__ empty directories.
