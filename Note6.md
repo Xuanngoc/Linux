@@ -23,6 +23,7 @@ These techniques vary in the efficiency of the compression and time.
 The ``tar`` command allows you to __create__ or __extract__ files from an archive file, often called a tarball. At the same time you can optionally compress while creating the archive, and decompress while extracting its contents.
 
 Some examples of the use of ``tar``:
+
 |Command|Usage|
 |-------|-----------|
 |tar xvf mydir.tar|Extract all the files in mydir.tar into the mydir directory|
@@ -34,7 +35,7 @@ Some examples of the use of ``tar``:
 ## Copying disks 
 The ``dd`` command is very useful for making copies of raw disk space.
 
-To use ``dd`` to make a copy of one disk onto another, __deleting everything__ that previously existed on the second disk, use:
+To use ``dd`` to make a copy of one disk onto another, _deleting everything__ that previously existed on the second disk, use:
 ```
 dd if=/dev/sda of=/dev/sdb
 ````
