@@ -109,8 +109,10 @@ $
 
 The ``file`` to check  the contents and certain characteristics to determine whether the files are plain text, shared libraries, executable programs, scripts, or something else.
 
---- 
-# Filesystem Structure 
+---
+# Filesystem
+
+## Filesystem Structure 
 On many systems, including Linux, the filesystem is structured like a tree. The tree is usually portrayed as inverted, and starts at what is most often called the root directory, which marks the beginning of the hierarchical filesystem and is also denoted by /.
 Some examples of filesystem types that Linux supports are:
 1. **ext3**, **ext4**, **btrfs**, **xfs** (native Linux filesystems)
@@ -123,6 +125,7 @@ Before you can start using a filesystem, you need to ``mount`` it to the filesys
 The ``mount`` command is used to attach a filesystem somewhere within the filesystem tree. Arguments include the ``device node`` and ``mount point``.
 
 ``` $ mount /dev/sda5 /mnt ```
+
 
 
 
