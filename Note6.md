@@ -23,6 +23,7 @@ These techniques vary in the efficiency of the compression and time.
 The ``tar`` command allows you to __create__ or __extract__ files from an archive file, often called a tarball. At the same time you can optionally compress while creating the archive, and decompress while extracting its contents.
 
 Some examples of the use of ``tar``:
+
 |Command|Usage|
 |-------|-----------|
 |tar xvf mydir.tar|Extract all the files in mydir.tar into the mydir directory|
