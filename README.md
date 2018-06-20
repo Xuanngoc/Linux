@@ -108,7 +108,7 @@ $
 ## The file utility 
 
 The ``file`` to check  the contents and certain characteristics to determine whether the files are plain text, shared libraries, executable programs, scripts, or something else.
----
+
 --- 
 # Filesystem Structure 
 On many systems, including Linux, the filesystem is structured like a tree. The tree is usually portrayed as inverted, and starts at what is most often called the root directory, which marks the beginning of the hierarchical filesystem and is also denoted by /.
