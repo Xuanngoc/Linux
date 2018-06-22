@@ -21,6 +21,10 @@
 
 ## Hard and Symbolic
     - Hard link: ln file.txt file1.txt 
+        + When you delete file.txt, file1 still working.
+        + file.txt and file1.txt h referenced
     - Soft link: ln -s file.txt file1.txt
+        + When you delete file1.txt, file1.txt is empty.
+        +  file.txt and file1.txt haven't referenced.
 
 ---

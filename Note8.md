@@ -12,6 +12,7 @@ Swapping is  necessary for two important reasons:
 
 The system can then use swaps on those pages and free up memory for other applications or even disk caches.
 The access to the disk is tens of thousands of times **slower** than the memory ram. 
+
 Linux has two forms of swap space: the **swap partition** and the **swap file**.
 - The swap partition is an independent section of the hard disk, used exclusively for the swap, no one else can reside there.
 - The swap file is a special file that resides in the filesystem between the system and data files.
@@ -26,7 +27,7 @@ Filename				Type		Size	Used	Priority
 | Amount of RAM in the system | Recommended swap space | Recommended swap space if allowing for hibernation |
 |:------------------------------|------------------------|----------------------------|
 |< 2GB| 2 times the amount of RAM | 3 times the mount of RAM|
-|>2 GB && < 8GB> | Equal to the amount of RAM | 2 times the amount of RAM |
+|>2 GB && < 8GB  | Equal to the amount of RAM | 2 times the amount of RAM |
 | > 8GB && <64GB | 0.5 times the amount of RAM | 1.5 times the amount of RAM |
 | > 64 GB | 4GB of swap space | No extra space needed |
 
