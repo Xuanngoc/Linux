@@ -79,7 +79,7 @@ There are a number of ways to view the values of currently __set__ environment v
 By default, variables created within a script are __only__ available to the current shell.All the child processes (sub-shells) will __not__ have access to values that have been set or modified.
 
  Allowing child processes to see the values, requires use of the export command.
- |Task|Command|
+|Task|Command|
 |----|-------|
 |Show the value of a specific variable|echo $SHELL|
 |Export a new variable value|export VAR=value|
