@@ -3,6 +3,7 @@
 
 Trình soạn thảo chuẩn của Linux là __vim__. Để thi hành lệnh vi có nhiều cú pháp khác nhau,nhưng phần lớn vim thường được khởi động để sửa đổi nội dung tập tin với cú pháp cơ bản như sau:<br>
 >`vi [file]...`
+
 Một số chú ý:
  - Nếu lệnh __vi__ được khởi động mà không có tên tập tin hay tên tập tin chưa tồn tại,
 thì __vi__ sẽ khởi động với một bộ đệm (_buffer_) rỗng..
@@ -26,6 +27,7 @@ trắng.
 cách nhau bằng một dòng trắng).
 
 ## Các lệnh cơ bản trong VI
+---
 | Lệnh | Chức năng |
 |------------|--------|
 |__:help__ |Mở hướng dẫn sử dụng vim|
@@ -83,6 +85,7 @@ dụ, lệnh dd xoá một dòng, và có thể nhập vào một số đứng t
 bị xoá, như là 4dd để xoá 4 dòng.
 
 ## Các lệnh liên quan đến tìm kiếm, thay thế 
+---
 | Lệnh | Chức năng |
 |--------|------|
 |__/__*string* | Thực hiện tìm chuỗi string trong văn bản từ trên xuống. Để thực hiện tìm ngược từ dưới lên trên, sử dụng __?__ thay thế cho __/__. |
@@ -99,6 +102,65 @@ Nhập lệnh __/__ cat để tìm chuỗi _'cat'_. Sau đó nhập lệnh __cw_
 __:g/__\$__/s//__\*\*__/g__.
 
 ## Sao chép, di chuyển nội dung 
+---
+Trong __vim__, việc thực hiện sao chép và di chuyển nội dung là rất bất tiện. Để thực hiện sao chép hay di chuyển nội dung, ta cần thực hiện các bước sau:
+- Đưa các dòng muốn sao chép/di chuyển vào bộ đệm.
+- Di chuyển con trỏ tới điểm mà ta muốn đưa nội dung vào.
+- Lấy nội dung từ trong bộ đệm ra.
+
+Các lệnh chủ yếu thường dùng để di chuyển nội dung vào/ra bộ đệm như sau:
+|||
+|---|---|
+|__:r__ |file Chèn tập tin file vào vị trí hiện hành của con trỏ|
+|__:co__*num* |Sao chép nội dung, tính từ vị trí con trỏ đến cuối dòng, đến dòng thứ _num_
+trong văn bản|
+|__:m__*num* |Di chuyển nội dung, tính từ vị trí con trỏ đến cuối dòng, đến dòng thứ _num_ trong văn bản|
+|*n*__yy__ |Đưa _n_ dòng, tính từ vị trí con trỏ trở xuống cuối văn bản, vào bộ đệm|
+|__y)__|Chép phần nội dung từ vị trí con trỏ đến cuối câu vào bộ đệm|
+|__y}__| Chép phần nội dung từ vị trí con trỏ đến cuối đoạn vào bộ đệm|
+|__p__| Lấy nội dung của bộ đệm đưa vào văn bản vào sau vị trí hiện hành của con trỏ.|
+|__P__ |Lấy nội dung của bộ đệm đưa vào văn bản vào trước vị trí hiện hành của con trỏ.|
+|__m__*a*| Đánh dấu dòng hiện hành với tên _a_|
+|"bufname | Xác định tên của bộ đệm|
+
+Một cách để thực hiện sao chép là sử dụng các bộ đệm. vim có 26 bộ đệm (được đặt tên
+theo 26 chữ cái: a, b ….) mà ta có thể truy nhập bằng cách nhập ký tự " ở phía trước tên bộ đệm. Thí dụ, để đưa 5 dòng (tính từ vị trí con trỏ trở xuống) vào bộ đệm 'a', ta nhập lệnh sau:
+>`"a5yy`
+
+Để lấy nội dung trong bộ đệm 'a' vào văn bản, ta chỉ cần di chuyển con trỏ tới vị trí đích và nhập lệnh:
+>`"ap`
+
+Ta cũng có thể sao chép nội dung từ một tập tin này sang một tập tin khác, bằng cách thực
+hiện ghi chúng xuống một tập tin tạm thời, và sau đó đọc tập tin đó vào tập tin đích. Thí
+dụ, thực hiện lệnh sau đây để ghi nội dung từ dòng thứ 3 đến dòng thứ 7 của tập tin hiện
+hành vào tập tin tạm thời có tên _temp_:
+>`:3, 7w temp`
+
+Ta có thể sửa đổi tập tin tạm thời này. Sau đó, di chuyển con trỏ tới vị trí mong muốn và nhập lệnh :r temp để lấy nội dung từ tập tin temp chèn vào trong tập tin hiện hành. Cách thức đơn giản để di chuyển một khối văn bản là sử dụng cách thức đánh dấu (mark). Để thực hiện điều này, ta di chuyển con trỏ đến dòng đầu tiên trong khối muốn di chuyển và đánh dấu nó bằng lệnh ma. Di chuyển con trỏ đến dòng cuối cùng của khối muốn di chuyển và đánh dấu nó bằng lệnh mb. Sau đó di chuyển con trỏ đến vị trí muốn chuyển khối văn bản đến, và thực hiện lệnh sau:
+>`:'a, 'b m`
+
+Lệnh này thực hiện lấy các dòng giữa điểm đánh dấu 'a' và điểm đánh dấu 'b' và di chuyển
+tới dòng hiện hành (được chỉ ra bởi dấu chấm).
+
+ ### **_Easier_**
+ Di chuyển và sao chép:
+
+__Di chuyển (cut):__
+1. Đặt con trỏ soạn thảo vào vị trí bạn muốn bắt đầu di chuyển (cut)
+2. Bấm __v__ (hoặc __V__ nếu bạn muốn cut cả dòng).
+3. Di chuyển con trỏ đến vị trí cuối đoạn văn bản bạn muốn cut
+4. Bấm __d__
+5. Di chuyển con trỏ đến vị trí bạn muốn dán (paste)
+6. Bấm __p__ để dán vào sau con trỏ, bấm __P__ để dán vào trước con trỏ.
+
+__Sao chép (copy):__
+1. Đặt con trỏ soạn thảo vào vị trí bạn muốn bắt đầu sao chép (copy)
+2. Bấm __v__ (hoặc V nếu bạn muốn copy cả dòng).
+3. Di chuyển con trỏ đến vị trí cuối đoạn văn bản bạn muốn copy
+4. Bấm __y__
+5. Di chuyển con trỏ đến vị trí bạn muốn dán (paste)
+6. Bấm __p__ để dán vào sau con trỏ, bấm __P__ để dán vào trước con trỏ.
+
 
 
 
