@@ -37,8 +37,12 @@ Cú pháp lệnh:
 
 Trong đó _username_ là tên tài khoản muốn tạo hay thay đổi mật mã. Trường hợp không có
 đối số _username_, lệnh __passwd__ sẽ thực hiện thay đổi mật mã cho tài khoản hiện hành.
+Các lựa chọn của lệnh:
 |||
 |---|---|
+|__-l__|Lựa chọn này được sử dụng để khoá tài khoản. Một tài khoản bị khoá sẽ có một ký tự ‘!’ đứng trước chuỗi mật mã đã được mã hoá trong tập tin /etc/shadow, đồng thời gán giá trị -1 tại các trường expire và disable trong tập tin|
+|__-u__[__-f__]   |Mở khoá một tài khoản đã bị khoá (ngược lại lựa chọn –l). Theo mặc định, passwd sẽ không mở khoá tài khoản nào không sử dụng mật mã. Lựa chọn -f bổ sung sẽ cho phép mở khoá tài khoản không sử dụng mật mã|
+|__-d__|Xoá bỏ mật mã của tài khoản|
 
 
 
