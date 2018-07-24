@@ -168,6 +168,113 @@ Lệnh su chỉ thực hiện thay đổi tài khoản hiện hành để mà c�
 Tuy nhiên, nếu thi hành lệnh __su__ với lựa chọn '__-__', tất cả các script khởi nạp, thường được chạy khi người dùng đăng nhập hệ thống, sẽ được thi hành. Do đó sau khi chạy lệnh su với lựa chọn '-', thì coi như ta đã đăng nhập vào hệ thống với tài khoản username qua lệnh __login__.<br>
 Lệnh __su__ được sử dụng chủ yếu trong trường hợp người dùng đăng nhập từ xa qua tài khoản thường và sau đó muốn có quyền của root để thi hành các lệnh quản trị.
 
+# CÁC TẬP TIN LIÊN QUAN 
+## Tập tin /etc/passwd và /etc/shadow
+---
+Khi một tài khoản người dùng được ấn định một mật mã, mật mã này sẽ được mã hoá bằng một giá trị được phát sinh một cách ngẫu nhiên gọi là _salt_. Giá trị _salt_ sau đó sẽ được lưu cùng với mật mã đã được mã hoá.
+Khi một người dùng đăng nhập hệ thống và cung cấp một mật mã, mật mã vừa nhập vào sẽ được mã hoá bằng giá trị _salt_, giá trị _salt_ này được lấy ra từ mật mã đã mã hoá của tài khoản đã được lưu trữ trước đó. Sau đó hệ thống thực hiện so sánh kết quả thu được với mật mã đã mã hoá của tài khoản. Nếu chúng giống nhau thì người dùng được xác thực.<br>
+Thông tin người dùng bao gồm cả mật mã được lưu trữ trong tập tin _/etc/passwd_. Mật mã được lưu trong một định dạng đã được mã hoá. Tập tin _/etc/passwd_ chứa thông tin UID và 69 GID, những thông tin này được sử dụng bởi các chương trình hệ thống. Do vậy, tập tin _/etc/passwd_ phải ở trong tình trạng để cho các chương trình, ứng dụng đều có khả năng đọc được. Do đó, khả năng để xảy ra một cuộc tấn công từ điển thực hiện thành công là rất dễ có.<br>
+Để giải quyết vấn đề này, Linux có chứa thêm gói _Shadow Suite_. Shadow Suite chuyển các
+mật mã đã được mã hoá vào trong tập tin _/etc/shadow_. Tập tin _/etc/shadow_ là một tập tin chỉ
+cho phép tài khoản __root__ truy nhập.<br>
+Ngoài việc ngăn chặn chống tấn công, Shadow Suite còn cung cấp các đặc tính hữu ích
+khác:
+- Cung cấp tập tin cấu hình để thiết lập các thông tin mặc định của tài khoản
+(/etc/login.defs)
+- Các tiện ích để thêm, sửa và xoá tài khoản nhóm, tài khoản người dùng
+- Cung cấp chính sách về thời hạn sử dụng tài khoản, mật mã và cơ chế khoá tài
+khoản
+- Hỗ trợ mật mã quay số (dial-up)
+
+### Định dạng tập tin /etc/passwd
+Một mục từ trong tập tin _/etc/passwd_ không được bảo vệ (shadow) có định dạng như sau:
+>> username:passwd:UID:GID:full_name:directory:shell
+
+Trong đó:
+
+__username__   Tên tài khoản của người dùng<br>
+__passwd__   Mật mã đã được mã hoá<br>
+__UID__   Mã nhận diện của tài khoản<br>
+__GID__   Mã nhận diện nhóm tài khoản<br>
+__full_name__   Tên đầy đủ của người dùng. Thực tế đây là vùng ghi chú.<br>
+__directory__   Chỉ ra thư mục chủ của tài khoản người dùng (với đường dẫn đầy đủ)<br>
+__shell__   Chỉ ra shell đăng nhập của người dùng (với đường dẫn đầy đủ)<br>
+
+__Thí dụ:__
+>> username:Npge08pfz4wuk:503:100:Full Name:/home/username:/bin/sh
+
+Trong đó _Np_ là salt và _ge08pfz4wuk_ là mật mã đã được mã hoá.
+
+Khi Shadow Suite được cài đặt, mỗi mục từ của tập tin /etc/passwd sẽ có định dạng sau:
+username:x:503:100:Full Name:/home/username:/bin/sh
+
+Trong đó x (ở trường thứ 2) đã thay thế cho mật mã đã mã hoá. Mật mã này được chuyển
+đến lưu ở trong tập tin /etc/shadow. Điều này có nghĩa là bất kỳ chương trình nào đọc tập tin
+/etc/passwd mà không cần kiểm tra mật mã vẫn sẽ làm việc chính xác.
+
+### Định dạng của tập tin shadow
+Mỗi mục từ trong tập tin /etc/shadow có chứa các thông tin ở định dạng như sau:
+>> username:passwd:last:min:max:warn:inact:expire:reserved
+
+Trong đó
+__username__ Tên tài khoản<br>
+__passwd__ Mật mã đã được mã hoá<br>
+__last__ Thời điểm, tính từ 1/1/1970, mà mật mã đã được thay đổi lần cuối<br>
+__min__ Số ngày tối thiểu trước khi mật mã có thể bị thay đổi<br>
+__max__ Số ngày tối đa sử dụng mật mã; sau đó mật mã phải được thay đổi<br>
+__warn__ Số ngày, trước khi mật mã hết hạn sử dụng, người dùng sẽ nhận được
+thông báo từ hệ thống<br>
+__inact__ Số ngày sau khi mật mã hết hạn sử dụng tài khoản sẽ bị làm vô hiệu
+__expire__ Thời điểm, tính từ 1/1/1970, mà tài khoản sẽ bị làm vô hiệu<br>
+__reserved__ Trường dự phòng<br>
+
+Chú ý:
+- Một tài khoản bị khoá sẽ có một ký tự __!__ đứng trước chuỗi mật mã đã được mã hoá
+trong tập tin
+- Tài khoản có giá trị __!!__ ở trường _passwd_ là tài khoản không có mật mã, và không
+thể sử dụng để đăng nhập hệ thống
+- Tài khoản người dùng nào có giá trị __*__ ở trường _passwd_ sẽ không được phép đăng
+nhập hệ thống
+
+---
+## Tập tin /etc/group
+Thông tin tài khoản nhóm người dùng được lưu trong tập tin _/etc/group_. Định dạng tập tin _/
+etc/group_ bao gồm nhiều mục từ, mỗi mục từ nằm trên một dòng và gồm có bốn trường chứa các thông tin về tên nhóm, mật mã của nhóm, mã nhận diện nhóm và danh sách các thành viên của nhóm:
+>> groupname:passwd:GID:userlist
+
+Trong đó<br>
+__groupname__ Tên tài khoản nhóm<br>
+__passwd__ Mật mã đã được mã hoá; Trong trường hợp sử dụng shadow, trường
+này có giá trị là x<br>
+__GID__ Mã nhận diện tài khoản nhóm<br>
+__userlist__ Danh sách các tài khoản người dùng thành viên (phân cách nhau bởi
+dấu phẩy)<br><br>
+
+## Tập tin login.defs
+Tập tin này xác định những thông tin sẽ được gán mặc định cho người dùng khi một tài
+khoản được tạo. Định dạng tập tin này gồm có nhiều khai báo theo cú pháp sau:
+>> __lựa_chọn giá_trị__
+
+Mỗi khai báo nằm trên một dòng riêng. Dòng ghi chú sẽ có một ký tự __#__ đứng đầu dòng.
+Các lựa chọn được khai báo trong tin này có thể bao gồm:
+
+|Lựa chọn|Giá trị mặc định|Ý nghĩa|
+|----|----|----|
+|MAIL_DIR|/var/spool/mail|Thư mục chứa hộp thư của người dùng, hay tên tập tin, tương ứng với thư mục chủ. Nếu chọn cả hai thì MAIL_DIR được ưu tiên sử dụng. Lựa chọn này bắt buộc phải có.|
+|MAIL_FILE|.mail||
+|PASS_MAX_DAYS|99999|Số ngày tối đa một mật mã có thể được sử dụng.|
+|PASS_MIN_DAYS|0|Số ngày tối thiểu cho phép giữa hai lần thay đổi mật mã.|
+|PASS_MIN_LEN|5|Chiều dài tối thiểu của mật mã|
+|PASS_WARN_AGE|7|Số ngày sẽ xuất hiện thông báo trước khi một mật mã hết hạn sử dụng|
+|UID_MIN|500|Giá trị tối thiểu  của UserID được phát sinh tự động khi tạo tài khoản người dùng mới|
+|UID_MAX|60000|Giá trị tối đa của UserID được phát sinh tự động khi tạo tài khoản người dùng mới||
+|GID_MIN|500|Giá trị tối thiểu  của GroupID được phát sinh tự động khi tạo tài khoản nhóm mới|
+|GID_MAX|60000|Giá trị tối tối đa của GroupID được phát sinh tự động khi tạo tài khoản nhóm mới|
+|USERDEL_CMD|/usr/sbin/userdel_local|Nếu được định nghĩa, lệnh này sẽ được thi hành khi xoá bỏ một tài khoản người dùng. Nó sẽ loại bỏ tất cả các công việc in ấn, cron … đang thi hành của tài khoản bị xoá bỏ.|
+|CREATE_HOME|yes|Nếu lựa chọn này có giá trị là yes thì mỗi khi tạotài khoản mới, thư mục chủ của tài khoản người dùng đó cũng sẽ được tạo.|
+
+
+
 
 
 
